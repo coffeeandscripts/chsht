@@ -5,6 +5,11 @@
 ## Features
 
 ## Quickstart
+~~~
+$ make
+$ ./chsht
+$ make clean
+~~~
 
 ## Plan
 * make it similar to "man" pages:
