@@ -9,7 +9,8 @@ int main (int argc, char *argv[]) {
         if (c.check_args()) {
                 if(c.eval_args()) {
                         //just testing with a set input first, then can take arg input
-                        //i found this on the internet
+                        //if testing using the commandline arguments, replace a with Interpreter::input
+                        //i found this on the internet, so not 100% on what this does
                         char a[] = "vim";
                         char buf[150];
                         //for snprintf??? char buf[BUFSIZ]
