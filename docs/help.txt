@@ -1,0 +1,2 @@
+-h      Returns list of available Commands
+-n      Creates a new entry

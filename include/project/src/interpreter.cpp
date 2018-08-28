@@ -1,34 +1,13 @@
-
-#include <stdlib.h>
-#include <cstring>
-#include <iostream>     //remove when files moved
-
-#include "project/interpreter.hpp"
-
-//currently no functionality for "--help"
-#define FAIL_CASE "Type chsht -h or *--help* for available commands"
-
-// PLACE IN project/interpreter.hpp
-#ifndef PROJECT_INTERPRETER_
-#define PROJECT_INTERPRETER_
-
-class Interpreter{
-        char *input;
-        int n_arg;
-        char *args[];
-public:
-        Interpreter(n_args, args);
-        int check_args(int n_arg);
-        int eval_args(char *args[]);
-}
-
-#endif
-// END
-
-// PLACE IN src/interpreter.cpp
 #include <iostream>
 
 #include "project/interpreter.hpp"
+
+#define FAIL_CASE "Type chsht -h for available commands"
+
+Interpreter::Interpreter (int _n_arg, char *_args[]) {
+        n_arg = _n_arg;
+        args[] = _args[];
+}
 
 int Interpreter::check_args() {
         if (n_arg <= 1) {
@@ -61,21 +40,4 @@ int Interpreter::eval_args() {
         } else {
                 return 1;
         }
-}
-// END
-
-int main (int argc, char *argv[]) {
-        Interpreter c(argc, argv);
-        if (c.check_args()) {
-                if(c.eval_args()) {
-                        system("sed -i '2s/.*/less -FX .\/docs\/sheets\/vim.chsht/' ./docs/sheets/open.sh" | ./docs./sheets/open.sh );              // look at you using pipes
-
-                }
-        }
-        return 0;
-}
-
-
-
-  return 0;
 }
