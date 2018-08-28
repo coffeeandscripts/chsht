@@ -4,6 +4,11 @@
 
 #define FAIL_CASE "Type chsht -h for available commands"
 
+Interpreter::Interpreter (int _n_arg, char *_args[]) {
+        n_arg = _n_arg;
+        args[] = _args[];
+}
+
 int Interpreter::check_args() {
         if (n_arg <= 1) {
                 std::cout << FAIL_CASE << std::endl;
@@ -11,11 +16,6 @@ int Interpreter::check_args() {
         } else {
                 return 1;
         }
-}
-
-Interpreter::Interpreter (int _n_arg, char *_args[]) {
-        n_arg = _n_arg;
-        args[] = _args[];
 }
 
 int Interpreter::eval_args() {
