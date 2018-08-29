@@ -19,6 +19,12 @@ Interpreter::Interpreter (int _n_arg, char *_args[]) {
         args = _args;
 }
 
+/* class - Interpreter deconstructor
+ * desc: currently clear but open to memory clearing to prevent memory leaks
+*/
+Interpreter::~Interpreter() {
+}
+
 /* func - check_args
  * desc: checks to see if there are any args given
 */

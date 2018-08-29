@@ -13,6 +13,7 @@ class Interpreter {
         char **args;
 public:
         Interpreter(int _n_arg, char *_args[]);
+        ~Interpreter();
         int check_args();
         int eval_args();
 };
