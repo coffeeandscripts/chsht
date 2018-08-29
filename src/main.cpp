@@ -14,9 +14,8 @@ int main (int argc, char *argv[]) {
         Interpreter c(argc, argv);
         if (c.check_args()) {
                 if(c.eval_args()) {
-                        char a[] = "vim";
                         char buf[BUFSIZ];
-                        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", a);
+                        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", c.get_input());
                         system(buf);
                 }
         }

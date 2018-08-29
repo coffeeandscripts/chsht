@@ -10,7 +10,7 @@ $ make
 $ ./chsht
 $ make clean
 ~~~
-
+load
 ## Plan
 * make it similar to "man" pages:
     chsht vim
