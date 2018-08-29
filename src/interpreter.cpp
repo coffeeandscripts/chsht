@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 #include "project/interpreter.hpp"
 
@@ -6,16 +7,16 @@
 
 Interpreter::Interpreter (int _n_arg, char *_args[]) {
         n_arg = _n_arg;
-        args[] = _args[];
+        args = _args;
 }
 
 int Interpreter::check_args() {
         if (n_arg <= 1) {
                 std::cout << FAIL_CASE << std::endl;
-                return 0;
         } else {
                 return 1;
         }
+        return 0;
 }
 
 int Interpreter::eval_args() {
@@ -32,12 +33,11 @@ int Interpreter::eval_args() {
                 default:
                         std::cout << FAIL_CASE << std::endl;
                         break;
-                return 0;
                 }
         } else if (n_arg > 2) {
                 std::cout << FAIL_CASE << std::endl;
-                return 0;
         } else {
                 return 1;
         }
+        return 0;
 }
