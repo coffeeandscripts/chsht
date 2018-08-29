@@ -1,2 +1,2 @@
 #!/bin/bash
-less -FX ./docs/sheets/bash.chsht
+less -FX ./docs/sheets/vim.chsht

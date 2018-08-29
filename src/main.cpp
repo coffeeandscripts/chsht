@@ -5,6 +5,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h> //this is for the snprintf function
 #include <iostream>
 
 #include "project/interpreter.hpp"
@@ -13,19 +14,9 @@ int main (int argc, char *argv[]) {
         Interpreter c(argc, argv);
         if (c.check_args()) {
                 if(c.eval_args()) {
-                        std::cout << "Worked" << std::endl;
-                        //just testing with a set input first, then can take arg input
-                        //if testing using the commandline arguments, replace a with Interpreter::input
-                        //i found this on the internet, so not 100% on what this does
-                        char a[] = "bash";
-                        char buf[250];
-                        //for snprintf??? char buf[BUFSIZ]
-                        // or use snprintf to prevent buffer being too small??? snprintf(buf, sizeof(buf) , "text %s", a)
-                        sprintf(buf, "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", a);
-                        //want to check if this got stored correctly
-                        //std::cout << "buffer is:   " << buf << std::endl;
-                        //theoreticall this should work?
-                        //system("sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/vim.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh");
+                        char a[] = "vim";
+                        char buf[BUFSIZ];
+                        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", a);
                         system(buf);
                 }
         }
