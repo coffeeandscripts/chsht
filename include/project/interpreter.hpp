@@ -1,3 +1,9 @@
+/* chsht - console cheatsheet viewer
+ * interpreter.hpp
+ * desc: header for interpreter class
+ * vers: 0.0.1
+*/
+
 #ifndef PROJECT_INTERPRETER_
 #define PROJECT_INTERPRETER_
 
