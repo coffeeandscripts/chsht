@@ -22,6 +22,7 @@ Interpreter::Interpreter (int _n_arg, char *_args[]) {
 /* class - Interpreter deconstructor
  * desc: currently clear but open to memory clearing to prevent memory leaks
 */
+//erin you dont need to put anything inside the {}, this is just fine
 Interpreter::~Interpreter() {
 }
 
