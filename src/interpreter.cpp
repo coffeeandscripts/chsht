@@ -17,12 +17,17 @@
 Interpreter::Interpreter (int _n_arg, char *_args[]) {
         n_arg = _n_arg;
         args = _args;
+        default_editor = "$(EDITOR|-vim)";
 }
 
 /* class - Interpreter deconstructor
  * desc: currently clear but open to memory clearing to prevent memory leaks
 */
 Interpreter::~Interpreter() {
+}
+
+char *Interpreter::get_input() {
+        return input;
 }
 
 /* func - check_args
