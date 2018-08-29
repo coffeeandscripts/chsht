@@ -2,7 +2,7 @@
  * main.cpp
  * desc: main function to interpret console commands
  * vers: 0.0.1
-*/
+ */
 
 #include <stdlib.h>
 #include <stdio.h> //this is for the snprintf function
