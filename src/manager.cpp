@@ -8,6 +8,8 @@
 
 #include "project/manager.hpp"
 
+#define SYSTEM_ERROR 256
+
 /* class - Manager constructor
  * desc: allocates memory to store console arguments
  */
@@ -23,6 +25,9 @@ Manager::~Manager() {
 
 void Manager::print() {
         char buf[BUFSIZ];
-        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", input);
-        system(buf);
+        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh 2>/dev/null", input);
+        if( system(buf) == 256 ){
+            std::cout << "There are no sheets available for " << input << "."<< std::endl;
+            std::cout << "Use chsht -n " << input << " to create a new sheet" << std::endl;
+        }
 }

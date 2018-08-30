@@ -1,2 +1,2 @@
 #!/bin/bash
-less -FX ./docs/sheets/test.chsht
+less -FX ./docs/sheets/n.chsht
