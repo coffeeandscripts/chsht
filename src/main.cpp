@@ -9,12 +9,13 @@
 #include <iostream>
 
 #include "project/interpreter.hpp"
+#include "project/manager.hpp"
 
 int main (int argc, char *argv[]) {
         Interpreter c(argc, argv);
         if (c.check_args()) {
                 if(c.eval_args()) {
-                        //
+                        Manager m();
                 }
         }
         return 0;
