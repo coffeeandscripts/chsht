@@ -7,6 +7,7 @@
 #ifndef PROJECT_MANAGER_
 #define PROJECT_MANAGER_
 
+extern std::string terminal_stdout(std::string cmd);
 
 class Manager {
 private:

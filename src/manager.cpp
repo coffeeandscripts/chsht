@@ -26,7 +26,7 @@ Manager::~Manager() {
 void Manager::print() {
         char buf[BUFSIZ];
         snprintf(buf ,sizeof(buf), "less -FX ./docs/sheets/%s.chsht 2>/dev/null", input);
-        if( system(buf) == SYSTEM_ERROR ){
+        if( system(buf) == SYSTEM_ERROR){
             std::cout << "There are no sheets available for " << input << "."<< std::endl;
             std::cout << "Use chsht -n " << input << " to create a new sheet" << std::endl;
         }

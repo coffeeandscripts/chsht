@@ -33,7 +33,7 @@ std::string terminal_stdout (std::string cmd){
       //space so that we dont run out of space in the buffer for the temrinal command
       //dynamically allocated memory?
       //although this will get wiped once functiosn done anyways
-    //  const int max_buffer = 256;
+     //const int max_buffer = 256;
       char buffer[BUFSIZ];
       //2>&1 combines stderr and stdout into stdout
       cmd.append(" 2>&1");
