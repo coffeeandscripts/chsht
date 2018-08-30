@@ -55,6 +55,9 @@ void Interpreter::interpret_args(char descriptor) {
                 std::cout << "Listing available commands:" << std::endl;
                 system("less -FX ./docs/help.txt");
                 break;
+        case 'l':
+                // list all sheets current in docs/sheets/
+                break;
         default:
                 std::cout << FAIL_CASE << std::endl;
                 break;
@@ -68,6 +71,12 @@ void Interpreter::interpret_args(char descriptor, char *query) {
         switch (descriptor) {
         case 'n':
                 std::cout << "Creating new entry for " << query << std::endl;
+                break;
+        case 'l':
+                // list all sheets current in docs/sheets/ using a "fuzzy-find" of query
+                break;
+        case 'a':
+                // adds the given file to docs/sheets/ after converting to .chsht file
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;
