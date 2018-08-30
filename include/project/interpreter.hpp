@@ -24,7 +24,8 @@ public:
         void interpret_args(char descriptor);
         void interpret_args(char descriptor, char *query);
         int eval_args();
-friend std::string terminal_stdout(std::string cmd);
+//friend std::string terminal_stdout(std::string cmd);
+//doesnt need to be friend, since its taking in a striaght string only.
 };
 
 #endif
