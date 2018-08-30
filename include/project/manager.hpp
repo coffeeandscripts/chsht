@@ -8,10 +8,11 @@
 #define PROJECT_MANAGER_
 
 class Manager {
-
+        char *input;
 public:
-        Manager();
+        Manager(char *);
         ~Manager();
+        void print();
 };
 
 #endif

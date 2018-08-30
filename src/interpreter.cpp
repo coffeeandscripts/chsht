@@ -98,10 +98,8 @@ int Interpreter::eval_args() {
                         }
                 } else {
                         input = args[n];
-                        char buf[BUFSIZ];
-                        snprintf(buf ,sizeof(buf), "sed -i '2s/.*/less -FX .\\/docs\\/sheets\\/%s.chsht/' ./docs/sheets/open.sh | ./docs/sheets/open.sh", get_input());
-                        system(buf);
+                        return 1;
                 }
         }
-        return 1;
+        return 0;
 }

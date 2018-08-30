@@ -15,7 +15,8 @@ int main (int argc, char *argv[]) {
         Interpreter c(argc, argv);
         if (c.check_args()) {
                 if(c.eval_args()) {
-                        Manager m();
+                        Manager m(c.get_input());
+                        m.print();
                 }
         }
         return 0;
