@@ -1,2 +1,5 @@
 -h      Returns list of available Commands
 -n      Creates a new entry
+-a      Add a new sheet
+-e      Edit a sheet
+-t      Used after -e, open with a particular editor

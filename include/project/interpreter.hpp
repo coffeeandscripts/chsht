@@ -7,7 +7,10 @@
 #ifndef PROJECT_INTERPRETER_
 #define PROJECT_INTERPRETER_
 
+extern std::string terminal_stdout(std::string cmd);
+
 class Interpreter {
+private:
         char *input;
         int n_arg;
         char **args;
@@ -21,6 +24,7 @@ public:
         void interpret_args(char descriptor);
         void interpret_args(char descriptor, char *query);
         int eval_args();
+friend std::string terminal_stdout(std::string cmd);
 };
 
 #endif

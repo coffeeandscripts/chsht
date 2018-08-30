@@ -7,10 +7,13 @@
 #include <iostream>
 #include <cstring>
 #include <stdio.h> //this is for the snprintf function
+#include <stdlib.h>
 
 #include "project/interpreter.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
+
+
 
 /* class - Interpreter constructor
  * desc: allocates memory to store console arguments
@@ -18,7 +21,7 @@
 Interpreter::Interpreter (int _n_arg, char *_args[]) {
         n_arg = _n_arg;
         args = _args;
-        default_editor = "$(EDITOR|-vim)";
+// [ -z $EDITOR ] && echo 0 || echo 1
 }
 
 /* class - Interpreter deconstructor
@@ -77,6 +80,10 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 break;
         case 'a':
                 // adds the given file to docs/sheets/ after converting to .chsht file
+                break;
+        case 'e':
+                //opens sheet for editing  in default editor
+                std::cout << "LS: " << terminal_stdout("echo 5") << std::endl;
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;

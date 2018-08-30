@@ -7,7 +7,9 @@
 #ifndef PROJECT_MANAGER_
 #define PROJECT_MANAGER_
 
+
 class Manager {
+private:
         char *input;
 public:
         Manager(char *);
