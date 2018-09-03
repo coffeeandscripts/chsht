@@ -16,6 +16,7 @@ public:
         Manager(char *);
         ~Manager();
         void print();
+        int checkFile();
 };
 
 #endif

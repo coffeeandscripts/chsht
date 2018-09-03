@@ -4,11 +4,9 @@
  * vers: 0.0.1
  */
 
-#include <iostream>
+ #include <iostream>
 
 #include "project/manager.hpp"
-
-#define SYSTEM_ERROR 256
 
 /* class - Manager constructor
  * desc: allocates memory to store console arguments
@@ -23,11 +21,28 @@ Manager::Manager (char *n) {
 Manager::~Manager() {
 }
 
+/* function -
+ * desc:
+ */
 void Manager::print() {
         char buf[BUFSIZ];
-        snprintf(buf ,sizeof(buf), "less -FX ./docs/sheets/%s.chsht 2>/dev/null", input);
-        if( system(buf) == SYSTEM_ERROR){
-            std::cout << "There are no sheets available for " << input << "."<< std::endl;
-            std::cout << "Use chsht -n " << input << " to create a new sheet" << std::endl;
+        snprintf(buf ,sizeof(buf), "less -FX .\\/docs\\/sheets\\/%s.chsht", input);
+        system(buf);
+}
+
+/* function -
+ * desc:
+ */
+int Manager::checkFile(){
+        char buf[BUFSIZ];
+        std::cout << "checking file..." << std::endl;
+        snprintf(buf ,sizeof(buf), "[ -f \"./docs./sheets/vim.chsht\" ] && echo 1 || echo 0");
+        int check_default = stoi(terminal_stdout(buf));
+        if( check_default == 1 ){
+                std::cout << "File Exists" << std::endl;
+                return 1;
+        }else {
+                std::cout <<" File Does Not Exist" << std::endl;
+                return 0;
         }
 }

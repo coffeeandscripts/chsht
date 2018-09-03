@@ -23,9 +23,9 @@ Interpreter::Interpreter (int _n_arg, char *_args[]) {
         args = _args;
         //figures out which default editor to use. Do we want this as a seperate function
         //or just leave it as is?. Will we need to actively figure out the default editor anywhere else?
-        //i dont it is needed, but check with you first
-        int check_default = stoi(terminal_stdout("[ -z $EDITOR ] && echo 0 || echo 1"));
-        if( check_default == 1 ){
+        //i dont think it is needed, but check with you first
+        int check_default = stoi(terminal_stdout("[ -z $EDITOR ] && echo 1 || echo 0"));
+        if( check_default == 0 ){
                 default_editor = "$EDITOR";
                 std::cout << "$EDITOR set as default editor" << std::endl;
         }else {
@@ -93,7 +93,7 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 break;
         case 'e':
                 //opens sheet for editing  in default editor
-
+                
 
                 break;
         default:

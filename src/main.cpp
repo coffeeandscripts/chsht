@@ -20,6 +20,7 @@ int main (int argc, char *argv[]) {
                 if(c.eval_args()) {
                         Manager m(c.get_input());
                         m.print();
+                        m.checkFile();
                 }
         }
         return 0;
