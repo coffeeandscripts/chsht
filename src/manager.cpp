@@ -8,6 +8,8 @@
 
 #include "project/manager.hpp"
 
+#define SYSTEM_ERROR 256
+
 /* class - Manager constructor
  * desc: allocates memory to store console arguments
  */
@@ -26,8 +28,10 @@ Manager::~Manager() {
  */
 void Manager::print() {
         char buf[BUFSIZ];
-        snprintf(buf ,sizeof(buf), "less -FX .\\/docs\\/sheets\\/%s.chsht", input);
-        system(buf);
+        snprintf(buf ,sizeof(buf), "less -FX .\\/docs\\/sheets\\/%s.chsht 2>/dev/null", input);
+        if (system(buf)== SYSTEM_ERROR){
+            std::cout << "File does not exist. Type -h for help" << std::endl;
+        }
 }
 
 /* function -
@@ -35,8 +39,7 @@ void Manager::print() {
  */
 int Manager::checkFile(){
         char buf[BUFSIZ];
-        std::cout << "checking file..." << std::endl;
-        snprintf(buf ,sizeof(buf), "[ -f \"./docs./sheets/vim.chsht\" ] && echo 1 || echo 0");
+        snprintf(buf ,sizeof(buf), "[ -f \"./docs/sheets/%s.chsht\" ] && echo 1 || echo 0", input);
         int check_default = stoi(terminal_stdout(buf));
         if( check_default == 1 ){
                 std::cout << "File Exists" << std::endl;
