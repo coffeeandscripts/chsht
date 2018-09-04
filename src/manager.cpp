@@ -42,10 +42,8 @@ int Manager::check_file(){
         snprintf(buf ,sizeof(buf), "[ -f \"./docs/sheets/%s.chsht\" ] && echo 1 || echo 0", input);
         int check_default = stoi(terminal_stdout(buf));
         if( check_default == 1 ){
-                std::cout << "File Exists" << std::endl;
                 return 1;
         }else {
-                std::cout <<" File Does Not Exist" << std::endl;
                 return 0;
         }
 }
