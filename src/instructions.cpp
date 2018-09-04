@@ -25,10 +25,12 @@ Instructions::~Instructions() {
 
 /* class - create_new
  * desc: copies default sheets into sheets directory and renames from user input
+ *        and replaces *default* text with user input
  */
 void Instructions::create_new(){
         char buf[BUFSIZ];
         snprintf(buf ,sizeof(buf), "cp .\\/docs\\/default.chsht .\\/docs\\/sheets\\/%s.chsht", input);
-        std::cout << "buf is: " << buf << std::endl;
+        system(buf);
+        snprintf(buf ,sizeof(buf), "sed -i 's/default/%s/' .\\/docs\\/sheets\\/%s.chsht", input, input);
         system(buf);
 }
