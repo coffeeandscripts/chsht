@@ -21,9 +21,11 @@ int main (int argc, char *argv[]) {
                         Manager m(c.get_input());
                         m.print();
                         m.check_file();
+                        m.~Manager();
 
                 }
         }
+        c.~Interpreter();
         return 0;
 }
 
