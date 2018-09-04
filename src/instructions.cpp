@@ -9,7 +9,6 @@
 
 #include "project/instructions.hpp"
 
-#define SYSTEM_ERROR 256
 
 /* class - Instructions constructor
  * desc: allocates memory to store console arguments
@@ -27,6 +26,9 @@ Instructions::~Instructions() {
 /* class - create_new
  * desc: currently clear but open to memory clearing to prevent memory leaks
  */
-void create_new (){
-
+void Instructions::create_new(){
+  char buf[BUFSIZ];
+  snprintf(buf ,sizeof(buf), "cp .\\/docs\\/default.chsht .\\/docs\\/sheets\\/%s.chsht", input);
+  std::cout << "buf is: " << buf << std::endl;
+  system(buf);
 }

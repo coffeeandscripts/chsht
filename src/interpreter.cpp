@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include "project/interpreter.hpp"
+#include "project/instructions.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
 
@@ -81,9 +82,11 @@ void Interpreter::interpret_args(char descriptor) {
  * desc: takes descriptor and the adjacent query and returns an output
  */
 void Interpreter::interpret_args(char descriptor, char *query) {
+        Instructions A(query);
         switch (descriptor) {
         case 'n':
                 std::cout << "Creating new entry for " << query << std::endl;
+                A.create_new();
                 break;
         case 'l':
                 // list all sheets current in docs/sheets/ using a "fuzzy-find" of query
@@ -93,13 +96,14 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 break;
         case 'e':
                 //opens sheet for editing  in default editor
-                
+
 
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;
                 break;
         }
+        A.~Instructions();
 }
 
 /* func - eval_args

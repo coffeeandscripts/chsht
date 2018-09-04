@@ -37,7 +37,7 @@ void Manager::print() {
 /* function -
  * desc:
  */
-int Manager::checkFile(){
+int Manager::check_file(){
         char buf[BUFSIZ];
         snprintf(buf ,sizeof(buf), "[ -f \"./docs/sheets/%s.chsht\" ] && echo 1 || echo 0", input);
         int check_default = stoi(terminal_stdout(buf));

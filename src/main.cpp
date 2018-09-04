@@ -10,7 +10,7 @@
 
 #include "project/interpreter.hpp"
 #include "project/manager.hpp"
-
+#include "project/instructions.hpp"
 //std::string terminal_stdout(std::string cmd);
 
 
@@ -20,7 +20,8 @@ int main (int argc, char *argv[]) {
                 if(c.eval_args()) {
                         Manager m(c.get_input());
                         m.print();
-                        m.checkFile();
+                        m.check_file();
+
                 }
         }
         return 0;

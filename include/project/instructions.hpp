@@ -7,10 +7,11 @@
 #ifndef PROJECT_INSTRUCTIONS_
 #define PROJECT_INSTRUCTIONS_
 
+extern std::string terminal_stdout(std::string cmd);
+
 class Instructions {
 private:
         char *input;
-
 public:
         Instructions(char *);
         ~Instructions();
