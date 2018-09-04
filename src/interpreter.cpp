@@ -11,6 +11,7 @@
 
 #include "project/interpreter.hpp"
 #include "project/instructions.hpp"
+#include "project/manager.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
 
@@ -83,10 +84,15 @@ void Interpreter::interpret_args(char descriptor) {
  */
 void Interpreter::interpret_args(char descriptor, char *query) {
         Instructions A(query);
+        Manager M(query);
         switch (descriptor) {
         case 'n':
-                std::cout << "Creating new entry for " << query << std::endl;
-                A.create_new();
+                if(M.check_file() == 0){
+                        std::cout << "Creating new entry for " << query << std::endl;
+                        A.create_new();
+                }else{
+                        std::cout << "File already exists. Type \"chsht " << query << "\" to open file." << std::endl;
+                }
                 break;
         case 'l':
                 // list all sheets current in docs/sheets/ using a "fuzzy-find" of query
@@ -96,13 +102,12 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 break;
         case 'e':
                 //opens sheet for editing  in default editor
-
-
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;
                 break;
         }
+        M.~Manager();
         A.~Instructions();
 }
 
