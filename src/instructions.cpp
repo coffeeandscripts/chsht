@@ -24,11 +24,11 @@ Instructions::~Instructions() {
 }
 
 /* class - create_new
- * desc: currently clear but open to memory clearing to prevent memory leaks
+ * desc: copies default sheets into sheets directory and renames from user input
  */
 void Instructions::create_new(){
-  char buf[BUFSIZ];
-  snprintf(buf ,sizeof(buf), "cp .\\/docs\\/default.chsht .\\/docs\\/sheets\\/%s.chsht", input);
-  std::cout << "buf is: " << buf << std::endl;
-  system(buf);
+        char buf[BUFSIZ];
+        snprintf(buf ,sizeof(buf), "cp .\\/docs\\/default.chsht .\\/docs\\/sheets\\/%s.chsht", input);
+        std::cout << "buf is: " << buf << std::endl;
+        system(buf);
 }

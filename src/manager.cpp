@@ -23,8 +23,8 @@ Manager::Manager (char *n) {
 Manager::~Manager() {
 }
 
-/* function -
- * desc:
+/* function - print
+ * desc: Prints sheet onto terminal, gives warning if file does not exist
  */
 void Manager::print() {
         char buf[BUFSIZ];
@@ -34,8 +34,8 @@ void Manager::print() {
         }
 }
 
-/* function -
- * desc:
+/* function - check_file
+ * desc: checks if file exists in sheets directory, returns 1 or 0 (true or false)
  */
 int Manager::check_file(){
         char buf[BUFSIZ];
