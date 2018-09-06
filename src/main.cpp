@@ -10,6 +10,7 @@
 
 #include "project/interpreter.hpp"
 #include "project/manager.hpp"
+#include "project/setup.hpp"
 
 //std::string terminal_stdout(std::string cmd);
 
