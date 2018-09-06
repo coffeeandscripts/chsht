@@ -12,6 +12,10 @@ private:
 public:
         Setup();
         ~Setup();
+        int exists(char const *);
+        int run();
+        void reset();
+        char const *read_conf(char const *);
 };
 
 #endif

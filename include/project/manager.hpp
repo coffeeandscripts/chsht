@@ -7,13 +7,16 @@
 #ifndef PROJECT_MANAGER_
 #define PROJECT_MANAGER_
 
+#include "project/setup.hpp"
+
 extern std::string terminal_stdout(std::string cmd);
 
 class Manager {
 private:
         char *input;
+        char const *sheet_dir;
 public:
-        Manager(char *);
+        Manager(char *, Setup);
         ~Manager();
         void print();
         int checkFile();

@@ -7,14 +7,16 @@
  #include <iostream>
 
 #include "project/manager.hpp"
+#include "project/setup.hpp"
 
 #define SYSTEM_ERROR 256
 
 /* class - Manager constructor
  * desc: allocates memory to store console arguments
  */
-Manager::Manager (char *n) {
+Manager::Manager (char *n, Setup s_engine) {
         input = n;
+        sheet_dir = s_engine.read_conf("directory");
 }
 
 /* class - Manager deconstructor
