@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include "project/interpreter.hpp"
+#include "project/setup.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
 
@@ -18,9 +19,11 @@
 /* class - Interpreter constructor
  * desc: allocates memory to store console arguments
  */
-Interpreter::Interpreter (int _n_arg, char *_args[]) {
+Interpreter::Interpreter (int _n_arg, char *_args[], Setup s_engine) {
         n_arg = _n_arg;
         args = _args;
+        editor = NULL;
+        sheets_dir = s_engine.read_conf("~/.chsht/sheets");
         //figures out which default editor to use. Do we want this as a seperate function
         //or just leave it as is?. Will we need to actively figure out the default editor anywhere else?
         //i dont think it is needed, but check with you first
@@ -63,13 +66,19 @@ int Interpreter::check_args() {
  * desc: takes descriptor and returns an output
  */
 void Interpreter::interpret_args(char descriptor) {
+        char buf[BUFSIZ];
         switch (descriptor) {
         case 'h':
                 std::cout << "Listing available commands:" << std::endl;
                 system("less -FX ./docs/help.txt");
                 break;
         case 'l':
-                // list all sheets current in docs/sheets/
+                strcpy(buf, "ls -R ");
+                strcat(buf, sheets_dir);
+                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                        strcat(buf, "/");
+                }
+                system(buf);
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;
@@ -81,20 +90,55 @@ void Interpreter::interpret_args(char descriptor) {
  * desc: takes descriptor and the adjacent query and returns an output
  */
 void Interpreter::interpret_args(char descriptor, char *query) {
+        char buf[BUFSIZ];
         switch (descriptor) {
         case 'n':
                 std::cout << "Creating new entry for " << query << std::endl;
+                strcpy(buf, "cp docs/default.chsht ~/.chsht/sheets/");
+                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                        strcat(buf, "/");
+                }
+                strcat(buf, query);
+                strcat(buf, ".chsht");
+                system(buf);
                 break;
         case 'l':
-                // list all sheets current in docs/sheets/ using a "fuzzy-find" of query
+                strcpy(buf, "ls -R ");
+                strcat(buf, sheets_dir);
+                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                        strcat(buf, "/");
+                }
+                strcat(buf, " | grep  -i ");
+                strcat(buf, query);
+                system(buf);
                 break;
         case 'a':
-                // adds the given file to docs/sheets/ after converting to .chsht file
+                strcpy(buf, "filename=$(basename -- ");
+                strcat(buf, query);
+                strcat(buf, ") && cp ");
+                strcat(buf, query);
+                strcat(buf, " ");
+                strcat(buf, sheets_dir);
+                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                        strcat(buf, "/");
+                }
+                strcat(buf, "${filename/.*}.chsht");
+                system(buf);
+                break;
+        case 't':
+                editor = query;
                 break;
         case 'e':
-                //opens sheet for editing  in default editor
-                
-
+                if(editor) {
+                        strcpy(buf, editor);
+                        strcat(buf, " ");
+                        strcat(buf, query);
+                } else {
+                        strcpy(buf, default_editor);
+                        strcat(buf, " ");
+                        strcat(buf, query);
+                }
+                system(buf);
                 break;
         default:
                 std::cout << FAIL_CASE << std::endl;

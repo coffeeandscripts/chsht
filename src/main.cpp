@@ -17,7 +17,7 @@
 
 int main (int argc, char *argv[]) {
         Setup s_engine;
-        Interpreter c(argc, argv);
+        Interpreter c(argc, argv, s_engine);
         if (c.check_args() && s_engine.run()) {
                 if(c.eval_args()) {
                         Manager m(c.get_input(), s_engine);
