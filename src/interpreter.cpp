@@ -94,7 +94,8 @@ void Interpreter::interpret_args(char descriptor, char *query) {
         switch (descriptor) {
         case 'n':
                 std::cout << "Creating new entry for " << query << std::endl;
-                strcpy(buf, "cp docs/default.chsht ~/.chsht/sheets/");
+                strcpy(buf, "cp docs/default.chsht ");
+                strcat(buf, sheets_dir);
                 if (!(*buf && buf[strlen(buf + 1)] == '/')) {
                         strcat(buf, "/");
                 }
