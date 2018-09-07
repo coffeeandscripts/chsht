@@ -5,7 +5,6 @@
  */
 
 #include <iostream>
-#include <filesystem>
 
 #include "project/setup.hpp"
 
