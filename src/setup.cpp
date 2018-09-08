@@ -10,8 +10,6 @@
 
 #define INITIAL_SETUP "Running initial setup procedures..."
 
-
-
 /* class - Setup constructor
  * desc:
  */
@@ -41,12 +39,16 @@ int Setup::exists(char const *dir_or_file) {
  */
 int Setup::run() {
         if (!exists("~/.chsht")) {
+                std::cout << INITIAL_SETUP << std::endl;
+                std::cout << "Making ~/.chsht directory" << std::endl;
                 system("mkdir ~/.chsht");
         }
         if (!exists("~/.chsht/sheets")) {
+                std::cout << "Making sheets directory" << std::endl;
                 system("mkdir ~/.chsht/sheets");
         }
         if (!exists("~/.chsht/chsht.conf")) {
+                std::cout << "Creating config file" << std::endl;
                 system("cp docs/chsht.conf ~/.chsht/chsht.conf");
         }
         return 1;
@@ -57,7 +59,6 @@ int Setup::run() {
  */
 void Setup::reset() {
         system("rm -rf ~/.chsht");
-        run();
 }
 
 /* class - read_conf

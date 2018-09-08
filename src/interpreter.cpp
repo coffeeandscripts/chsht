@@ -25,6 +25,7 @@ Interpreter::Interpreter (int _n_arg, char *_args[], Setup s_engine) {
         args = _args;
         editor = NULL;
         sheets_dir = s_engine.read_conf("~/.chsht/sheets");
+        setup_engine = s_engine;
         int check_default = stoi(terminal_stdout("[ -z $EDITOR ] && echo 1 || echo 0"));
         if( check_default == 0 ){
                 default_editor = "$EDITOR";
@@ -164,6 +165,10 @@ void Interpreter::help() {
         system("less -FX ./docs/help.txt");
 }
 
+void Interpreter::reset() {
+        setup_engine.reset();
+}
+
 /* func - check_slash
  * desc: makes sure there is a slash at the end of a string
  */
@@ -185,6 +190,8 @@ int Interpreter::eval_args() {
                 ("a,add", "Add sheet", cxxopts::value<std::string>())
                 ("set-editor", "Set editor", cxxopts::value<std::string>())
                 ("e,edit", "Edit sheet", cxxopts::value<std::string>())
+                ("r,remove", "Remove sheet", cxxopts::value<std::string>())
+                ("reset", "Delete ~/.chsht directory")
                 ("h,help", "Help")
                 ;
         auto result = options.parse(n_arg, args);
@@ -208,6 +215,12 @@ int Interpreter::eval_args() {
         }
         if (result.count("help")) {
                 help();
+        }
+        if (result.count("remove")) {
+                remove_sheet(result["remove"].as<std::string>().c_str());
+        }
+        if (result.count("reset")) {
+                reset();
         }
         return 0;
 }

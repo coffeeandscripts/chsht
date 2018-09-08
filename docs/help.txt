@@ -4,4 +4,6 @@
 -a [val], --add [val]           Add sheet
 --set-editor [val]              Set editor
 -e [val], --edit [val]          Edit sheet
+-r [val], --remove [val]        Remove sheet
 -h, --help                      Help
+--reset                         Removes ~/.chsht directory

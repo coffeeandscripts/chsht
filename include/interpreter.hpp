@@ -19,6 +19,7 @@ private:
         char const *default_editor;
         char const *editor;
         char const *sheets_dir;
+        Setup setup_engine;
 public:
         Interpreter(int _n_arg, char *_args[], Setup);
         ~Interpreter();
@@ -34,6 +35,7 @@ public:
         void edit_sheet(char const *);
         void remove_sheet(char const *);
         void help();
+        void reset();
         void check_slash(char []);
 //friend std::string terminal_stdout(std::string cmd);
 //doesnt need to be friend, since its taking in a striaght string only.
