@@ -4,7 +4,7 @@
  * vers: 0.0.1
  */
 
- #include <iostream>
+#include <iostream>
 
 #include "manager.hpp"
 #include "setup.hpp"

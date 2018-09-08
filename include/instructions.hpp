@@ -10,7 +10,6 @@
 class Instructions {
 private:
         char *input;
-
 public:
         Instructions(char *);
         ~Instructions();

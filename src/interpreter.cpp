@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <cstring>
-#include <stdio.h> //this is for the snprintf function
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "interpreter.hpp"
@@ -14,8 +14,6 @@
 #include "cxxopts.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
-
-
 
 /* class - Interpreter constructor
  * desc: allocates memory to store console arguments

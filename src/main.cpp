@@ -5,15 +5,11 @@
  */
 
 #include <stdlib.h>
-
 #include <iostream>
 
 #include "interpreter.hpp"
 #include "manager.hpp"
 #include "setup.hpp"
-
-//std::string terminal_stdout(std::string cmd);
-
 
 int main (int argc, char *argv[]) {
         Setup s_engine;
@@ -31,16 +27,8 @@ int main (int argc, char *argv[]) {
 std::string terminal_stdout (std::string cmd){
       std::string data;
       FILE * stream;
-      //how can i optimise the memory used here.
-      //just realised i misinterpreted stuff. BUFSIZ is giving it the maximum
-      //space so that we dont run out of space in the buffer for the temrinal command
-      //dynamically allocated memory?
-      //although this will get wiped once functiosn done anyways
-     //const int max_buffer = 256;
       char buffer[BUFSIZ];
-      //2>&1 combines stderr and stdout into stdout
       cmd.append(" 2>&1");
-
       stream = popen(cmd.c_str(), "r");
       if (stream) {
           while (!feof(stream))

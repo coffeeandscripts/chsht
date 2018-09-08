@@ -37,8 +37,6 @@ public:
         void help();
         void reset();
         void check_slash(char []);
-//friend std::string terminal_stdout(std::string cmd);
-//doesnt need to be friend, since its taking in a striaght string only.
 };
 
 #endif
