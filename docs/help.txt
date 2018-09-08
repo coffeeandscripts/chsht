@@ -1,5 +1,7 @@
--h      Returns list of available Commands
--n      Creates a new entry
--a      Add a new sheet
--e      Edit a sheet
--t      Used after -e, open with a particular editor
+-n [val], --new [val]           New sheet
+-l [val], --list [val]          List sheets
+--list-all                      List all sheets
+-a [val], --add [val]           Add sheet
+--set-editor [val]              Set editor
+-e [val], --edit [val]          Edit sheet
+-h, --help                      Help
