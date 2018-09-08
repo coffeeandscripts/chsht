@@ -24,15 +24,7 @@ Interpreter::Interpreter (int _n_arg, char *_args[], Setup s_engine) {
         n_arg = _n_arg;
         args = _args;
         editor = NULL;
-        char buf[BUFSIZ];
-        strcpy(buf, s_engine.read_conf("~/.chsht/sheets"));
-        if (!(*buf && buf[strlen(buf + 1)] == '/')) {
-                strcat(buf, "/");
-        }
-        sheets_dir = buf;
-        //figures out which default editor to use. Do we want this as a seperate function
-        //or just leave it as is?. Will we need to actively figure out the default editor anywhere else?
-        //i dont think it is needed, but check with you first
+        sheets_dir = s_engine.read_conf("~/.chsht/sheets");
         int check_default = stoi(terminal_stdout("[ -z $EDITOR ] && echo 1 || echo 0"));
         if( check_default == 0 ){
                 default_editor = "$EDITOR";
@@ -68,76 +60,116 @@ int Interpreter::check_args() {
         return 0;
 }
 
-/* func - interpret_args
- * desc: takes descriptor and returns an output
+/* func - new_sheet
+ * desc: copies default sheet to set location
  */
-void Interpreter::interpret_args(char descriptor) {
+void Interpreter::new_sheet(char const *new_val) {
         char buf[BUFSIZ];
-        switch (descriptor) {
-        case 'h':
-                std::cout << "Listing available commands:" << std::endl;
-                system("less -FX ./docs/help.txt");
-                break;
-        case 'l':
-                strcpy(buf, "ls -R ");
-                strcat(buf, sheets_dir);
-                system(buf);
-                break;
-        default:
-                std::cout << FAIL_CASE << std::endl;
-                break;
-        }
+        std::cout << "Creating new entry for " << new_val << std::endl;
+        strcpy(buf, "cp docs/default.chsht ");
+        strcat(buf, sheets_dir);
+        check_slash(buf);
+        strcat(buf, new_val);
+        strcat(buf, ".chsht");
+        system(buf);
+}
+
+/* func - list_sheets
+ * desc: lists all the sheets in set location
+ */
+void Interpreter::list_sheets() {
+        char buf[BUFSIZ];
+        std::cout << "Listing all sheets:" << std::endl;
+        strcpy(buf, "ls -R ");
+        strcat(buf, sheets_dir);
+        system(buf);
 }
 
 /* func - interpret_args
- * desc: takes descriptor and the adjacent query and returns an output
+ * desc: runs regex to find sheets in set location
  */
-void Interpreter::interpret_args(char descriptor, char *query) {
+void Interpreter::list_sheets(char const *list_reg) {
         char buf[BUFSIZ];
-        switch (descriptor) {
-        case 'n':
-                std::cout << "Creating new entry for " << query << std::endl;
-                strcpy(buf, "cp docs/default.chsht ");
-                strcat(buf, sheets_dir);
-                strcat(buf, query);
-                strcat(buf, ".chsht");
-                system(buf);
-                break;
-        case 'l':
-                strcpy(buf, "ls -R ");
-                strcat(buf, sheets_dir);
-                strcat(buf, " | grep  -i ");
-                strcat(buf, query);
-                system(buf);
-                break;
-        case 'a':
-                strcpy(buf, "filename=$(basename -- ");
-                strcat(buf, query);
-                strcat(buf, ") && cp ");
-                strcat(buf, query);
+        std::cout << "Listing sheets with regex: " << list_reg << std::endl;
+        strcpy(buf, "ls -R ");
+        strcat(buf, sheets_dir);
+        check_slash(buf);
+        strcat(buf, " | grep  -i ");
+        strcat(buf, list_reg);
+        system(buf);
+}
+
+/* func - add_sheet
+ * desc: copies prebuilt sheet and changes file type
+ */
+void Interpreter::add_sheet(char const *add_val) {
+        char buf[BUFSIZ];
+        std::cout << "Adding " << add_val << std::endl;
+        strcpy(buf, "filename=$(basename -- ");
+        strcat(buf, add_val);
+        strcat(buf, ") && cp ");
+        strcat(buf, add_val);
+        strcat(buf, " ");
+        strcat(buf, sheets_dir);
+        check_slash(buf);
+        strcat(buf, "${filename/.*}.chsht");
+        system(buf);
+}
+
+/* func - set_editor
+ * desc: allows for custom text editor to be set
+ */
+void Interpreter::set_editor(char const *editor_val) {
+        std::cout << "Setting text editor as " << editor_val << std::endl;
+        editor = editor_val;
+}
+
+/* func - edit_sheet
+ * desc: edits given sheet using default editor or set editor
+ */
+void Interpreter::edit_sheet(char const *edit_val) {
+        char buf[BUFSIZ];
+        std::cout << "Editting " << edit_val << std::endl;
+        if(editor) {
+                strcpy(buf, editor);
                 strcat(buf, " ");
-                strcat(buf, sheets_dir);
-                strcat(buf, "${filename/.*}.chsht");
-                system(buf);
-                break;
-        case 't':
-                editor = query;
-                break;
-        case 'e':
-                if(editor) {
-                        strcpy(buf, editor);
-                        strcat(buf, " ");
-                        strcat(buf, query);
-                } else {
-                        strcpy(buf, default_editor);
-                        strcat(buf, " ");
-                        strcat(buf, query);
-                }
-                system(buf);
-                break;
-        default:
-                std::cout << FAIL_CASE << std::endl;
-                break;
+                strcat(buf, edit_val);
+        } else {
+                strcpy(buf, default_editor);
+                strcat(buf, " ");
+                strcat(buf, edit_val);
+        }
+        system(buf);
+}
+
+/* func - remove_sheet
+ * desc: removes a sheet from set location
+ */
+void Interpreter::remove_sheet(char const *remove_val) {
+        char buf[BUFSIZ];
+        std::cout << "Removing " << remove_val << std::endl;
+        strcpy(buf, "rm ");
+        strcat(buf, sheets_dir);
+        check_slash(buf);
+        strcat(buf, remove_val);
+        strcat(buf, ".chsht");
+        system(buf);
+}
+
+/* func - help
+ * desc: prints help commands
+ */
+void Interpreter::help() {
+        std::cout << "Listing available commands:" << std::endl;
+        system("less -FX ./docs/help.txt");
+}
+
+/* func - check_slash
+ * desc: makes sure there is a slash at the end of a string
+ */
+void Interpreter::check_slash(char buf[BUFSIZ]) {
+        if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                strcat(buf, "/");
         }
 }
 
@@ -145,18 +177,37 @@ void Interpreter::interpret_args(char descriptor, char *query) {
  * desc: evaluates the meaning of given args (whether -x or raw statement)
  */
 int Interpreter::eval_args() {
-        for(int n = 1; n < n_arg; n++) {
-                if (args[n][0] == '-' && (strlen(args[n]) == 2)) {
-                        if (n < n_arg - 1) {
-                                interpret_args(args[n][1], args[n+1]);
-                                n++;
-                        } else {
-                                interpret_args(args[n][1]);
-                        }
-                } else {
-                        input = args[n];
-                        return 1;
-                }
+        cxxopts::Options options("chsht", "terminal cheatsheet");
+        options.add_options()
+                ("n,new", "New sheet", cxxopts::value<std::string>())
+                ("l,list", "List sheets", cxxopts::value<std::string>())
+                ("list-all", "List all sheets")
+                ("a,add", "Add sheet", cxxopts::value<std::string>())
+                ("set-editor", "Set editor", cxxopts::value<std::string>())
+                ("e,edit", "Edit sheet", cxxopts::value<std::string>())
+                ("h,help", "Help")
+                ;
+        auto result = options.parse(n_arg, args);
+        if (result.count("new")) {
+                new_sheet(result["new"].as<std::string>().c_str());
+        }
+        if (result.count("list")) {
+                list_sheets(result["list"].as<std::string>().c_str());
+        }
+        if (result.count("list-all")) {
+                list_sheets();
+        }
+        if (result.count("add")) {
+                add_sheet(result["add"].as<std::string>().c_str());
+        }
+        if (result.count("set-editor")) {
+                set_editor(result["set-editor"].as<std::string>().c_str());
+        }
+        if (result.count("edit")) {
+                edit_sheet(result["edit"].as<std::string>().c_str());
+        }
+        if (result.count("help")) {
+                help();
         }
         return 0;
 }

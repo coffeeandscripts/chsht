@@ -17,17 +17,24 @@ private:
         int n_arg;
         char **args;
         char const *default_editor;
-        char *editor;
+        char const *editor;
         char const *sheets_dir;
 public:
         Interpreter(int _n_arg, char *_args[], Setup);
         ~Interpreter();
         char *get_input();
         int check_args();
-        void interpret_args(char descriptor);
-        void interpret_args(char descriptor, char *query);
+        void interpret_args();
         int eval_args();
-
+        void new_sheet(char const *);
+        void list_sheets();
+        void list_sheets(char const *);
+        void add_sheet(char const *);
+        void set_editor(char const *);
+        void edit_sheet(char const *);
+        void remove_sheet(char const *);
+        void help();
+        void check_slash(char []);
 //friend std::string terminal_stdout(std::string cmd);
 //doesnt need to be friend, since its taking in a striaght string only.
 };
