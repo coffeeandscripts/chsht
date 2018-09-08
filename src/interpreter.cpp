@@ -11,6 +11,7 @@
 
 #include "project/interpreter.hpp"
 #include "project/setup.hpp"
+#include "project/cxxopts.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
 
