@@ -23,7 +23,12 @@ Interpreter::Interpreter (int _n_arg, char *_args[], Setup s_engine) {
         n_arg = _n_arg;
         args = _args;
         editor = NULL;
-        sheets_dir = s_engine.read_conf("~/.chsht/sheets");
+        char buf[BUFSIZ];
+        strcpy(buf, s_engine.read_conf("~/.chsht/sheets"));
+        if (!(*buf && buf[strlen(buf + 1)] == '/')) {
+                strcat(buf, "/");
+        }
+        sheets_dir = buf;
         //figures out which default editor to use. Do we want this as a seperate function
         //or just leave it as is?. Will we need to actively figure out the default editor anywhere else?
         //i dont think it is needed, but check with you first
@@ -75,9 +80,6 @@ void Interpreter::interpret_args(char descriptor) {
         case 'l':
                 strcpy(buf, "ls -R ");
                 strcat(buf, sheets_dir);
-                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
-                        strcat(buf, "/");
-                }
                 system(buf);
                 break;
         default:
@@ -96,9 +98,6 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 std::cout << "Creating new entry for " << query << std::endl;
                 strcpy(buf, "cp docs/default.chsht ");
                 strcat(buf, sheets_dir);
-                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
-                        strcat(buf, "/");
-                }
                 strcat(buf, query);
                 strcat(buf, ".chsht");
                 system(buf);
@@ -106,9 +105,6 @@ void Interpreter::interpret_args(char descriptor, char *query) {
         case 'l':
                 strcpy(buf, "ls -R ");
                 strcat(buf, sheets_dir);
-                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
-                        strcat(buf, "/");
-                }
                 strcat(buf, " | grep  -i ");
                 strcat(buf, query);
                 system(buf);
@@ -120,9 +116,6 @@ void Interpreter::interpret_args(char descriptor, char *query) {
                 strcat(buf, query);
                 strcat(buf, " ");
                 strcat(buf, sheets_dir);
-                if (!(*buf && buf[strlen(buf + 1)] == '/')) {
-                        strcat(buf, "/");
-                }
                 strcat(buf, "${filename/.*}.chsht");
                 system(buf);
                 break;
