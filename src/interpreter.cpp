@@ -9,9 +9,9 @@
 #include <stdio.h> //this is for the snprintf function
 #include <stdlib.h>
 
-#include "project/interpreter.hpp"
-#include "project/setup.hpp"
-#include "project/cxxopts.hpp"
+#include "interpreter.hpp"
+#include "setup.hpp"
+#include "cxxopts.hpp"
 
 #define FAIL_CASE "Type chsht -h for available commands"
 

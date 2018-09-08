@@ -7,7 +7,7 @@
 
  #include <iostream>
 
-#include "project/instructions.hpp"
+#include "instructions.hpp"
 
 #define SYSTEM_ERROR 256
 

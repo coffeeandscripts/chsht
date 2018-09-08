@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "project/setup.hpp"
+#include "setup.hpp"
 
 #define INITIAL_SETUP "Running initial setup procedures..."
 

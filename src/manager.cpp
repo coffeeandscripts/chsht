@@ -6,8 +6,8 @@
 
  #include <iostream>
 
-#include "project/manager.hpp"
-#include "project/setup.hpp"
+#include "manager.hpp"
+#include "setup.hpp"
 
 #define SYSTEM_ERROR 256
 

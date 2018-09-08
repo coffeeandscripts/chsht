@@ -8,9 +8,9 @@
 
 #include <iostream>
 
-#include "project/interpreter.hpp"
-#include "project/manager.hpp"
-#include "project/setup.hpp"
+#include "interpreter.hpp"
+#include "manager.hpp"
+#include "setup.hpp"
 
 //std::string terminal_stdout(std::string cmd);
 
