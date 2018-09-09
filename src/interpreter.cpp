@@ -220,5 +220,5 @@ int Interpreter::eval_args() {
         if (result.count("reset")) {
                 reset();
         }
-        return 0;
+        return 1;
 }
