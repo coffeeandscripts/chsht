@@ -20,12 +20,16 @@ private:
         char *input;
         char const *sheet_dir;
         int title;
-        std::string cmd;
+        char cmd;
         int n_cmd;
+        int indent;
+        bool new_line;
 public:
         Manager(char *, Setup);
         ~Manager();
-        void print_cmd(std::string);
+        void cls_hl();
+        void new_line_indent();
+        void print_cmd(char);
         void mode_set(char);
         void interpret_file();
         void print();

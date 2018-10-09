@@ -1,21 +1,16 @@
-# Title
-
-## Subtitle
-
-<strong>Bold</strong>                    [01mLICENSE[0m
-<blue>Blue</blue>                    [34mdocs[0m
-<purple>Purple</purple>                  [35mlogo.png[0m
-<cyan>Green</cyan>                   [36mlogo.png[0m
-<yellow>Yellow</yellow>                  [33minclude[0m
-<green>Yellow</green>                  [32minclude[0m
-
-## Subtitle
-
-* (shortcut)[explanation]
-* (shortcut)[explanation]
-* (shortcut)[explanation]
-* (shortcut)[explanation]
-
-## Subtitle
-
-### Subsubtitle
+\1Title
+\2Subtitle
+\sBold\/ - this is bold
+\bBlue
+\pPurple
+\cCyan
+\yYellow
+\gGreen
+\2Subtitle
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Subtitle
+\3Subsubtitle
+You can write more here
