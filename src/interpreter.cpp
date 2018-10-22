@@ -43,7 +43,7 @@ Interpreter::~Interpreter() {
 /* func - get_input
  * desc: returns the value of input that is stored in eval_args()
  */
-char *Interpreter::get_input() {
+std::string Interpreter::get_input() {
         return input;
 }
 
@@ -189,6 +189,7 @@ int Interpreter::eval_args() {
                 ("set-editor", "Set editor", cxxopts::value<std::string>())
                 ("e,edit", "Edit sheet", cxxopts::value<std::string>())
                 ("r,remove", "Remove sheet", cxxopts::value<std::string>())
+                ("v,view", "View sheet", cxxopts::value<std::string>())
                 ("reset", "Delete ~/.chsht directory")
                 ("h,help", "Help")
                 ;
@@ -219,6 +220,9 @@ int Interpreter::eval_args() {
         }
         if (result.count("reset")) {
                 reset();
+        }
+        if (result.count("view")) {
+                input = result["view"].as<std::string>();
         }
         return 1;
 }

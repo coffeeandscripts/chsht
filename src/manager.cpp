@@ -19,8 +19,10 @@
 /* class - Manager constructor
  * desc: allocates memory to store console arguments
  */
-Manager::Manager (char *n, Setup s_engine) {
+Manager::Manager (std::string n, Setup s_engine) {
         input = n;
+        pw = getpwuid(getuid());
+        home_dir = pw->pw_dir;
         sheet_dir = s_engine.read_conf("directory");
         title = 0;
         cmd = '\0';
@@ -29,8 +31,6 @@ Manager::Manager (char *n, Setup s_engine) {
         new_line = true;
         system("rm ~/.chsht/tmp.chsht");
         system("touch ~/.chsht/tmp.chsht");
-        pw = getpwuid(getuid());
-        home_dir = pw->pw_dir;
         tmp.open(home_dir + "/.chsht/tmp.chsht", std::fstream::app);
 }
 
@@ -157,7 +157,7 @@ void Manager::mode_set(char ch) {
 
 void Manager::interpret_file() {
         std::ifstream fin;
-        fin.open("docs/default.chsht", std::ios::in);
+        fin.open("docs/sheets/" + input + ".chsht", std::ios::in);
         char ch;
         while (!fin.eof() ) {
         	fin.get(ch);

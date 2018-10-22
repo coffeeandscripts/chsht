@@ -18,7 +18,7 @@ extern std::string terminal_stdout(std::string cmd);
 
 class Manager {
 private:
-        char *input;
+        std::string input;
         char const *sheet_dir;
         int title;
         char cmd;
@@ -29,7 +29,7 @@ private:
         std::string home_dir;
         std::fstream tmp;
 public:
-        Manager(char *, Setup);
+        Manager(std::string, Setup);
         ~Manager();
         void cls_hl();
         void new_line_indent();

@@ -13,7 +13,7 @@ extern std::string terminal_stdout(std::string cmd);
 
 class Interpreter {
 private:
-        char *input;
+        std::string input;
         int n_arg;
         char **args;
         char const *default_editor;
@@ -23,7 +23,7 @@ private:
 public:
         Interpreter(int _n_arg, char *_args[], Setup);
         ~Interpreter();
-        char *get_input();
+        std::string get_input();
         int check_args();
         void interpret_args();
         int eval_args();
