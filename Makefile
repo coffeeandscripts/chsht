@@ -3,6 +3,7 @@ CXX ?= g++
 # path
 SRC_PATH = src
 BUILD_PATH = build
+PREFIX = /usr/local
 BIN_PATH = $(BUILD_PATH)/bin
 
 # executable
@@ -70,3 +71,21 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@echo "Compiling: $< -> $@"
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
+
+.PHONY: install
+install: chsht
+	@echo "Installing chsht"
+	@sudo cp $< $(PREFIX)/bin/chsht
+	@mkdir -p ~/.chsht
+	@mkdir -p ~/.chsht/sheets
+	@echo "Copying docs"
+	@cp docs/sheets/* ~/.chsht/sheets/
+	@cp docs/chsht.conf ~/.chsht/chsht.conf
+	@cp docs/default.chsht ~/.chsht/default.chsht
+	@cp docs/help.txt ~/.chsht/help.txt
+
+.PHONY: uninstall
+uninstall: chsht
+	@echo "Uninstalling chsht"
+	@sudo rm $(PREFIX)/bin/chsht
+	@rm -rf ~/.chsht

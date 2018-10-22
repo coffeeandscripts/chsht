@@ -1,3 +1,4 @@
+-v [val], --view [val]          View sheet
 -n [val], --new [val]           New sheet
 -l [val], --list [val]          List sheets
 --list-all                      List all sheets

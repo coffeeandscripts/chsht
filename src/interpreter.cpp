@@ -27,10 +27,8 @@ Interpreter::Interpreter (int _n_arg, char *_args[], Setup s_engine) {
         int check_default = stoi(terminal_stdout("[ -z $EDITOR ] && echo 1 || echo 0"));
         if( check_default == 0 ){
                 default_editor = "$EDITOR";
-                std::cout << "$EDITOR set as default editor" << std::endl;
         }else {
                 default_editor = "vi";
-                std::cout << default_editor <<" set as default editor" << std::endl;
         }
 }
 
@@ -65,7 +63,7 @@ int Interpreter::check_args() {
 void Interpreter::new_sheet(char const *new_val) {
         char buf[BUFSIZ];
         std::cout << "Creating new entry for " << new_val << std::endl;
-        strcpy(buf, "cp docs/default.chsht ");
+        strcpy(buf, "cp ~/.chsht/default.chsht ");
         strcat(buf, sheets_dir);
         check_slash(buf);
         strcat(buf, new_val);
@@ -131,12 +129,16 @@ void Interpreter::edit_sheet(char const *edit_val) {
         std::cout << "Editting " << edit_val << std::endl;
         if(editor) {
                 strcpy(buf, editor);
-                strcat(buf, " ~/.chsht/sheets/");
+                strcat(buf, " ");
+                strcat(buf, sheets_dir);
+                check_slash(buf);
                 strcat(buf, edit_val);
                 strcat(buf, ".chsht");
         } else {
                 strcpy(buf, default_editor);
-                strcat(buf, " ~/.chsht/sheets/");
+                strcat(buf, " ");
+                strcat(buf, sheets_dir);
+                check_slash(buf);
                 strcat(buf, edit_val);
                 strcat(buf, ".chsht");
         }
@@ -162,7 +164,7 @@ void Interpreter::remove_sheet(char const *remove_val) {
  */
 void Interpreter::help() {
         std::cout << "Listing available commands:" << std::endl;
-        system("less -FX ./docs/help.txt");
+        system("less -FX ~/.chsht/help.txt");
 }
 
 void Interpreter::reset() {
