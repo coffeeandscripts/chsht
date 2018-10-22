@@ -7,6 +7,9 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 #include "manager.hpp"
 #include "setup.hpp"
@@ -24,6 +27,11 @@ Manager::Manager (char *n, Setup s_engine) {
         n_cmd = 0;
         indent = 0;
         new_line = true;
+        system("rm ~/.chsht/tmp.chsht");
+        system("touch ~/.chsht/tmp.chsht");
+        pw = getpwuid(getuid());
+        home_dir = pw->pw_dir;
+        tmp.open(home_dir + "/.chsht/tmp.chsht", std::fstream::app);
 }
 
 /* class - Manager deconstructor
@@ -35,32 +43,32 @@ Manager::~Manager() {
 void Manager::print_cmd(char cmd) {
         switch(cmd) {
                 case 'y':
-                        std::cout << "[33m";
+                        tmp << "[33m";
                         break;
                 case 'b':
-                        std::cout << "[34m";
+                        tmp << "[34m";
                         break;
                 case 'g':
-                        std::cout << "[32m";
+                        tmp << "[32m";
                         break;
                 case 'c':
-                        std::cout << "[36m";
+                        tmp << "[36m";
                         break;
                 case 'p':
-                        std::cout << "[35m";
+                        tmp << "[35m";
                         break;
                 case 's':
-                        std::cout << "[01m";
+                        tmp << "[01m";
                         break;
                 case '1':
-                        std::cout << "[01m";
+                        tmp << "[01m";
                         break;
                 case '2':
-                        std::cout << "[33m";
+                        tmp << "[33m";
                         indent = 2;
                         break;
                 case '3':
-                        std::cout << "[32m";
+                        tmp << "[32m";
                         indent = 4;
                         break;
         }
@@ -70,7 +78,7 @@ void Manager::print_cmd(char cmd) {
  * desc: closes the highlight function
 */
 void Manager::cls_hl() {
-        std::cout << "[0m";
+        tmp << "[0m";
         switch(cmd) {
                 case '2':
                         indent = 4;
@@ -86,13 +94,13 @@ void Manager::new_line_indent() {
                 case 0:
                         break;
                 case 2:
-                        std::cout << "  ";
+                        tmp << "  ";
                         break;
                 case 4:
-                        std::cout << "    ";
+                        tmp << "    ";
                         break;
                 case 6:
-                        std::cout << "      ";
+                        tmp << "      ";
                 default:
                         break;
         }
@@ -108,7 +116,7 @@ void Manager::mode_set(char ch) {
                                 cls_hl();
                                 cmd = '\0';
                                 n_cmd = 0;
-                                std::cout << std::endl;
+                                tmp << std::endl;
                                 new_line = true;
                                 break;
                         case '(':
@@ -116,7 +124,7 @@ void Manager::mode_set(char ch) {
                                 break;
                         case ')':
                                 cls_hl();
-                                std::cout << " -- ";
+                                tmp << " -- ";
                                 break;
                         case '[':
                                 print_cmd('s');
@@ -128,12 +136,12 @@ void Manager::mode_set(char ch) {
                                 if (new_line) {
                                         new_line_indent();
                                 }
-                                std::cout << ch;
+                                tmp << ch;
                                 new_line = false;
                                 break;
                 }
         } else if (ch == '\\' && n_cmd == 1) {
-                std::cout << ch;
+                tmp << ch;
                 cmd = '\0';
                 n_cmd = 0;
         } else if (n_cmd == 1 && ch == '/') {
@@ -155,18 +163,15 @@ void Manager::interpret_file() {
         	fin.get(ch);
         	mode_set(ch);
 	}
+        tmp.close();
 }
 
 /* function -
  * desc:
  */
 void Manager::print() {
-        char buf[BUFSIZ];
         interpret_file();
-        snprintf(buf ,sizeof(buf), "less -FX .\\/docs\\/sheets\\/%s.chsht 2>/dev/null", input);
-        if (system(buf)== SYSTEM_ERROR){
-            std::cout << "File does not exist. Type -h for help" << std::endl;
-        }
+        system("less ~/.chsht/tmp.chsht");
 }
 
 /* function -

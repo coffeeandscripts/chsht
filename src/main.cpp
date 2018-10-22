@@ -18,7 +18,7 @@ int main (int argc, char *argv[]) {
                 if(c.eval_args()) {
                         Manager m(c.get_input(), s_engine);
                         m.print();
-                        m.checkFile();
+                        //m.checkFile();
                 }
         }
         return 0;

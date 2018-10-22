@@ -8,6 +8,7 @@
 #define PROJECT_MANAGER_
 
 #include <cstring>
+#include <fstream>
 
 #include "setup.hpp"
 
@@ -24,6 +25,9 @@ private:
         int n_cmd;
         int indent;
         bool new_line;
+        struct passwd* pw;
+        std::string home_dir;
+        std::fstream tmp;
 public:
         Manager(char *, Setup);
         ~Manager();

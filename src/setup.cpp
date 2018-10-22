@@ -51,6 +51,9 @@ int Setup::run() {
                 std::cout << "Creating config file" << std::endl;
                 system("cp docs/chsht.conf ~/.chsht/chsht.conf");
         }
+        if (!exists("~/.chsht/tmp.chsht")) {
+                system("touch ~/.chsht/tmp.chsht");
+        }
         return 1;
 }
 
