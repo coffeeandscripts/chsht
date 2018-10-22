@@ -37,6 +37,7 @@ public:
         void mode_set(char);
         void interpret_file();
         void print();
+        int exists(char const *); 
         int checkFile();
 };
 

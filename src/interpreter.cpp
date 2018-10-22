@@ -131,12 +131,14 @@ void Interpreter::edit_sheet(char const *edit_val) {
         std::cout << "Editting " << edit_val << std::endl;
         if(editor) {
                 strcpy(buf, editor);
-                strcat(buf, " ");
+                strcat(buf, " ~/.chsht/sheets/");
                 strcat(buf, edit_val);
+                strcat(buf, ".chsht");
         } else {
                 strcpy(buf, default_editor);
-                strcat(buf, " ");
+                strcat(buf, " ~/.chsht/sheets/");
                 strcat(buf, edit_val);
+                strcat(buf, ".chsht");
         }
         system(buf);
 }
@@ -223,6 +225,7 @@ int Interpreter::eval_args() {
         }
         if (result.count("view")) {
                 input = result["view"].as<std::string>();
+                return 1;
         }
-        return 1;
+        return 0;
 }

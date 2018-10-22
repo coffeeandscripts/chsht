@@ -157,7 +157,7 @@ void Manager::mode_set(char ch) {
 
 void Manager::interpret_file() {
         std::ifstream fin;
-        fin.open("docs/sheets/" + input + ".chsht", std::ios::in);
+        fin.open(home_dir + "/.chsht/sheets/" + input + ".chsht", std::ios::in);
         char ch;
         while (!fin.eof() ) {
         	fin.get(ch);
@@ -166,12 +166,25 @@ void Manager::interpret_file() {
         tmp.close();
 }
 
+int Manager::exists(char const *dir_or_file) {
+        char buf[BUFSIZ];
+        snprintf(buf ,sizeof(buf), "test -e %s", dir_or_file);
+        if (!system(buf)) {
+                return 1;
+        }
+        return 0;
+}
+
 /* function -
  * desc:
  */
 void Manager::print() {
-        interpret_file();
-        system("less ~/.chsht/tmp.chsht");
+        if (exists((home_dir + "/.chsht/sheets/" + input + ".chsht").c_str())) {
+                interpret_file();
+                system("less ~/.chsht/tmp.chsht");
+        } else {
+                std::cout << "Sheet does not exist" << std::endl;
+        }
 }
 
 /* function -
