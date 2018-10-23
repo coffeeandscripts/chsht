@@ -40,6 +40,9 @@ Manager::Manager (std::string n, Setup s_engine) {
 Manager::~Manager() {
 }
 
+/* func - print_cmd
+ * desc: prints special colour characters when requested
+ */
 void Manager::print_cmd(char cmd) {
         switch(cmd) {
                 case 'y':
@@ -89,6 +92,9 @@ void Manager::cls_hl() {
         }
 }
 
+/* func - new_line_indent
+ * desc: evaluates current indent and automatically sets it
+ */
 void Manager::new_line_indent() {
         switch(indent) {
                 case 0:
@@ -106,6 +112,9 @@ void Manager::new_line_indent() {
         }
 }
 
+/* func - mode_set
+ * desc: figures out what text highlight is needed
+ */
 void Manager::mode_set(char ch) {
         if (ch == '\\' && n_cmd == 0) {
                 cmd = '=';
@@ -155,6 +164,9 @@ void Manager::mode_set(char ch) {
         }
 }
 
+/* func - interpret_file
+ * desc: reads through set file
+ */
 void Manager::interpret_file() {
         std::ifstream fin;
         fin.open(home_dir + "/.chsht/sheets/" + input + ".chsht", std::ios::in);
@@ -166,6 +178,9 @@ void Manager::interpret_file() {
         tmp.close();
 }
 
+/* func - exists
+ * desc: checks if file exists (DUPLICATE AND SHOULD BE REMOVED)
+ */
 int Manager::exists(char const *dir_or_file) {
         char buf[BUFSIZ];
         snprintf(buf ,sizeof(buf), "test -e %s", dir_or_file);
@@ -175,8 +190,8 @@ int Manager::exists(char const *dir_or_file) {
         return 0;
 }
 
-/* function -
- * desc:
+/* function - print
+ * desc: prints the file to screen
  */
 void Manager::print() {
         if (exists((home_dir + "/.chsht/sheets/" + input + ".chsht").c_str())) {

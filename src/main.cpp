@@ -23,6 +23,9 @@ int main (int argc, char *argv[]) {
         return 0;
 }
 
+/* func - terminal_stdout
+ * desc: clean method to get terminal outputs
+ */
 std::string terminal_stdout (std::string cmd){
       std::string data;
       FILE * stream;
