@@ -5,12 +5,34 @@
 **A lightweight console cheatsheet.**
 
 ## Overview
-
 Using chsht, you will no longer struggle to remember keymappings or shortcuts in your favourite console or GUI applications. With a large collection of pre-prepared cheatsheets which are easy to edit, as well as the ability to add your own, it will simplify navigating your out-of-the-box or otherwise customised experience. Built to reflect the ever popular "man pages" that have become the bread and butter of many programmers, developers and enthusiasts, chsht strives to simplify the process and readability, while focussing on user defined processes as well as in-app key-mappings. This is not limited to applications however, as systemwide keymappings can also be forgotten, or common commandline arguments may need easy reference. Many of these are provided, but you can add your own.
 
-## Features
+## Commands
+~~~
+-v [val], --view [val]          View sheet
+-n [val], --new [val]           New sheet
+-l [val], --list [val]          List sheets
+--list-all                      List all sheets
+-a [val], --add [val]           Add sheet
+--set-editor [val]              Set editor
+-e [val], --edit [val]          Edit sheet
+-r [val], --remove [val]        Remove sheet
+-h, --help                      Help
+--reset                         Removes ~/.chsht directory
+~~~
 
 ## Quickstart
+### Installation
+~~~
+$ make
+$ make install
+$ make clean            # optional to clean working directory
+~~~
+
+### Uninstallation
+~~~
+$ make uninstall
+~~~
 
 ## For Developers
 
@@ -20,13 +42,7 @@ You can add your own cheatsheet on installation through our command line API:
 $ chsht -a your_app.chsht
 ~~~
 
-Alternatively other file formats can also be given as long as they follow standard markdown layout as described in the template below:
-
-~~~
-
-~~~
-
-The chsht file can also be manually added to ~/.chsht/sheets/ if that is a prefered option.
+The chsht file can also be manually added to ~/.chsht/sheets/ if that is a preferred option.
 
 ## License
 Copyright (C) 2018 coffee&scripts and animalsa
