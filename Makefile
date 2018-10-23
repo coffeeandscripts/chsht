@@ -85,7 +85,7 @@ install: chsht
 	@cp docs/help.txt ~/.chsht/help.txt
 
 .PHONY: uninstall
-uninstall: chsht
+uninstall: 
 	@echo "Uninstalling chsht"
 	@sudo rm $(PREFIX)/bin/chsht
 	@rm -rf ~/.chsht

@@ -69,6 +69,7 @@ void Interpreter::new_sheet(char const *new_val) {
         strcat(buf, new_val);
         strcat(buf, ".chsht");
         system(buf);
+        edit_sheet(new_val);
 }
 
 /* func - list_sheets
