@@ -1,1 +1,31 @@
-this is vim
+\1Vim
+\2Global
+\*(:help keyword)[open help for keyword]
+\*(:saveas file)[save file as]
+\*(:close)[close current pane]
+\*(K)[open man page for word under the cursor]
+\2Cursor Movement
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Editing
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Visual Mode
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Cut and Paste
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Exiting
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
