@@ -29,6 +29,37 @@ $ make install
 $ make clean            # optional to clean working directory
 ~~~
 
+### Edit sheets
+All sheets can be found in ~/.chsht/sheets.
+
+When making a new sheet, simply type:
+
+~~~
+chsht -n sheet_name --set-editor your_editor_choice 		# this defaults to vi
+~~~
+
+The default sheet will be copied and opened in this case.
+
+~~~
+\1Title
+\2Subtitle
+\sBold\/ - this is bold
+\bBlue
+\pPurple
+\cCyan
+\yYellow
+\gGreen
+\2Subtitle
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\*(shortcut)[explanation]
+\2Subtitle
+\3Subsubtitle
+You can write more here
+~~~
+
+
 ### Uninstallation
 ~~~
 $ make uninstall
